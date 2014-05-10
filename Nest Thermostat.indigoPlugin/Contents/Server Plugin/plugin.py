@@ -661,11 +661,11 @@ class Plugin(indigo.PluginBase):
 
         try:
             testNest = NestThermostat(username, password, devicename, devicelocation)
-        except Exception, e:
-            errorDict["username"] = "Couldn't connect. Is your username correct?" + e
-            errorDict["password"] = "Couldn't connect. Is your password correct?"
-            errorDict["devicename"] = "Couldn't connect. Is your device name correct?"
-            errorDict["devicelocation"] = "Couldn't connect. Is your device location correct?"
+        except urllib2.URLError, e:
+            errorDict["username"] = "Couldn't connect. Is your username correct?" + e.reason
+            errorDict["password"] = "Couldn't connect. Is your password correct?" + e.reason
+            errorDict["devicename"] = "Couldn't connect. Is your device name correct?" + e.reason
+            errorDict["devicelocation"] = "Couldn't connect. Is your device location correct?" + e.reason
             return (False, valuesDict, errorDict)
 
         return (True, valuesDict)
