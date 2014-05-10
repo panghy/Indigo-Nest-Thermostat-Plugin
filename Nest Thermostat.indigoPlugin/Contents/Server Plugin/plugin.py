@@ -661,8 +661,8 @@ class Plugin(indigo.PluginBase):
 
         try:
             testNest = NestThermostat(username, password, devicename, devicelocation)
-        except (RuntimeError, TypeError, NameError) as e:
-            errorDict["username"] = "Couldn't connect. Is your username correct?" + e
+        except Exception as e:
+            errorDict["username"] = "Couldn't connect. Is your username correct?" + e.message
             errorDict["password"] = "Couldn't connect. Is your password correct?"
             errorDict["devicename"] = "Couldn't connect. Is your device name correct?"
             errorDict["devicelocation"] = "Couldn't connect. Is your device location correct?"
